@@ -5,7 +5,7 @@ RUN npm install -g pnpm@10.10.0
 FROM base AS deps
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
-RUN corepack enable pnpm && pnpm install --frozen-lockfile
+RUN corepack enable pnpm && pnpm install --no-frozen-lockfile
 
 # Stage 2: Build the application
 FROM base AS builder

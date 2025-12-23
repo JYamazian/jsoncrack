@@ -1,10 +1,8 @@
 import React from "react";
-import Link from "next/link";
 import { Flex, Group } from "@mantine/core";
 import styled from "styled-components";
 import toast from "react-hot-toast";
 import { AiOutlineFullscreen } from "react-icons/ai";
-import { FaGithub } from "react-icons/fa6";
 import { JSONCrackLogo } from "../../../layout/JsonCrackLogo";
 import { FileMenu } from "./FileMenu";
 import { ToolsMenu } from "./ToolsMenu";
@@ -54,11 +52,6 @@ export const Toolbar = () => {
         <ToolsMenu />
       </Group>
       <Group gap="xs" justify="right" w="100%" style={{ flexWrap: "nowrap" }}>
-        <Link href="https://github.com/AykutSarac/jsoncrack.com" rel="noopener" target="_blank">
-          <StyledToolElement title="GitHub">
-            <FaGithub size="18" />
-          </StyledToolElement>
-        </Link>
         <StyledToolElement title="Fullscreen" onClick={fullscreenBrowser}>
           <AiOutlineFullscreen size="18" />
         </StyledToolElement>
