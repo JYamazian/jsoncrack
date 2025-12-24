@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#a855f7"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="32" fill="url(#logoGrad)"/>
+  <g fill="white">
+    <!-- Left brace -->
+    <path d="M55 50 C45 50 40 55 40 65 L40 80 C40 90 35 95 25 95 C35 95 40 100 40 110 L40 125 C40 135 45 140 55 140" stroke="white" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <!-- Right brace -->
+    <path d="M125 50 C135 50 140 55 140 65 L140 80 C140 90 145 95 155 95 C145 95 140 100 140 110 L140 125 C140 135 135 140 125 140" stroke="white" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <!-- Center dots representing JSON structure -->
+    <circle cx="70" cy="75" r="6"/>
+    <circle cx="90" cy="95" r="6"/>
+    <circle cx="110" cy="115" r="6"/>
+    <!-- Connecting lines -->
+    <line x1="74" y1="79" x2="86" y2="91" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <line x1="94" y1="99" x2="106" y2="111" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

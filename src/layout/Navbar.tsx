@@ -1,8 +1,9 @@
 ﻿import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Button, Menu, Group, Burger, Drawer, Stack, Divider, NavLink } from "@mantine/core";
+import { Button, Menu, Group, Burger, Drawer, Stack, Divider, NavLink, ActionIcon, SegmentedControl, Box, Text } from "@mantine/core";
 import styled from "styled-components";
-import { LuChevronDown } from "react-icons/lu";
+import { LuChevronDown, LuSun, LuMoon, LuMonitor } from "react-icons/lu";
+import useConfig, { ThemeMode } from "../store/useConfig";
 import { JSONCrackLogo } from "./JsonCrackLogo";
 
 const StyledNavbar = styled.nav<{ $darkMode?: boolean }>`
@@ -38,10 +39,13 @@ const MobileMenuButton = styled.div`
 
 interface NavbarProps {
   darkMode?: boolean;
+  showThemeSwitcher?: boolean;
 }
 
-export const Navbar = ({ darkMode = false }: NavbarProps) => {
+export const Navbar = ({ darkMode = false, showThemeSwitcher = true }: NavbarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const themeMode = useConfig(state => state.themeMode);
+  const setThemeMode = useConfig(state => state.setThemeMode);
   const buttonColor = darkMode ? "gray" : "dark";
 
   // Close mobile menu when resizing to desktop
@@ -56,9 +60,11 @@ export const Navbar = ({ darkMode = false }: NavbarProps) => {
     return () => window.removeEventListener("resize", handleResize);
   }, [mobileMenuOpen]);
 
+  const ThemeIcon = themeMode === "light" ? LuSun : themeMode === "dark" ? LuMoon : LuMonitor;
+
   return (
     <StyledNavbar $darkMode={darkMode}>
-      <JSONCrackLogo fontSize="1rem" />
+      <JSONCrackLogo fontSize="1rem" darkMode={darkMode} />
 
       {/* Desktop Menu */}
       <DesktopMenu>
@@ -213,11 +219,67 @@ export const Navbar = ({ darkMode = false }: NavbarProps) => {
             >
             Schema
             </Button>
+            {showThemeSwitcher && (
+              <Menu withArrow shadow="sm">
+                <Menu.Target>
+                  <ActionIcon
+                    variant="subtle"
+                    color={buttonColor}
+                    size="lg"
+                    radius="md"
+                    aria-label="Theme switcher"
+                  >
+                    <ThemeIcon size={18} />
+                  </ActionIcon>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  <Menu.Label>Theme</Menu.Label>
+                  <Menu.Item
+                    leftSection={<LuSun size={14} />}
+                    onClick={() => setThemeMode("light")}
+                    bg={themeMode === "light" ? "violet.1" : undefined}
+                  >
+                    Light
+                  </Menu.Item>
+                  <Menu.Item
+                    leftSection={<LuMoon size={14} />}
+                    onClick={() => setThemeMode("dark")}
+                    bg={themeMode === "dark" ? "violet.1" : undefined}
+                  >
+                    Dark
+                  </Menu.Item>
+                  <Menu.Item
+                    leftSection={<LuMonitor size={14} />}
+                    onClick={() => setThemeMode("auto")}
+                    bg={themeMode === "auto" ? "violet.1" : undefined}
+                  >
+                    System
+                  </Menu.Item>
+                </Menu.Dropdown>
+              </Menu>
+            )}
       </Group>
       </DesktopMenu>
 
       {/* Mobile Menu Button */}
       <MobileMenuButton>
+        {showThemeSwitcher && (
+          <ActionIcon
+            variant="subtle"
+            color={buttonColor}
+            size="lg"
+            radius="md"
+            aria-label="Theme switcher"
+            onClick={() => {
+              const modes: ThemeMode[] = ["light", "dark", "auto"];
+              const currentIndex = modes.indexOf(themeMode);
+              setThemeMode(modes[(currentIndex + 1) % 3]);
+            }}
+            mr="xs"
+          >
+            <ThemeIcon size={18} />
+          </ActionIcon>
+        )}
         <Burger
           opened={mobileMenuOpen}
           onClick={() => setMobileMenuOpen(o => !o)}

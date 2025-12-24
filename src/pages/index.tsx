@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   Container,
@@ -10,11 +10,15 @@ import {
   Badge,
   Stack,
   Button,
+  Box,
+  ThemeIcon,
 } from "@mantine/core";
 import { NextSeo } from "next-seo";
-import { TbArrowsExchange } from "react-icons/tb";
+import { TbArrowRight, TbCode, TbSchema, TbTransform } from "react-icons/tb";
 import { SEO } from "../constants/seo";
+import { Footer } from "../layout/Footer";
 import Layout from "../layout/PageLayout";
+import useConfig from "../store/useConfig";
 
 const converters = [
   { from: "JSON", to: "YAML", href: "/converter/json-to-yaml" },
@@ -50,46 +54,134 @@ const typeGenerators = [
   { from: "CSV", to: "Kotlin", href: "/type/csv-to-kotlin" },
 ];
 
+const formatColors: Record<string, string> = {
+  JSON: "violet",
+  YAML: "blue",
+  XML: "teal",
+  CSV: "orange",
+  TypeScript: "blue",
+  Go: "cyan",
+  Rust: "orange",
+  Kotlin: "grape",
+};
+
 const HomePage = () => {
+  const themeMode = useConfig(state => state.themeMode);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const getEffectiveTheme = () => {
+      if (themeMode === "auto") {
+        return window.matchMedia("(prefers-color-scheme: dark)").matches;
+      }
+      return themeMode === "dark";
+    };
+
+    setIsDarkMode(getEffectiveTheme());
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => {
+      if (themeMode === "auto") {
+        setIsDarkMode(mediaQuery.matches);
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, [themeMode]);
+
   return (
     <Layout>
       <NextSeo {...SEO} canonical="https://jsoncrack.com" />
 
       {/* Hero */}
-      <Container size="lg" py={60}>
-        <Stack align="center" gap="md" mb={60}>
-          <Title ta="center" c="dark" fz={{ base: 28, sm: 40 }} fw={700}>
-            JSON Crack Tools
-          </Title>
-          <Text ta="center" c="dimmed" size="lg" maw={500}>
-            Visualize, convert, and transform your data with our free tools
-          </Text>
-          <Button component={Link} href="/editor" size="lg" radius="md" color="violet">
-            Open Editor
-          </Button>
-        </Stack>
+      <Box
+        style={{
+          background: isDarkMode
+            ? "linear-gradient(180deg, #1a1a2e 0%, #0a0a0a 100%)"
+            : "linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%)",
+          borderBottom: `1px solid ${isDarkMode ? "#2a2a3e" : "#e9ecef"}`,
+        }}
+      >
+        <Container size="lg" py={80}>
+          <Stack align="center" gap="lg">
+            <Title
+              ta="center"
+              c={isDarkMode ? "white" : "dark"}
+              fz={{ base: 32, sm: 48 }}
+              fw={800}
+              style={{ letterSpacing: "-0.02em" }}
+            >
+              Transform Your Data
+              <Text component="span" inherit c="violet">
+                {" "}
+                Instantly
+              </Text>
+            </Title>
+            <Text ta="center" c="dimmed" size="xl" maw={600} lh={1.6}>
+              Visualize JSON as interactive graphs, convert between formats, and generate types for
+              any language — all in your browser.
+            </Text>
+            <Button
+              component={Link}
+              href="/editor"
+              size="lg"
+              radius="md"
+              color="violet"
+              rightSection={<TbArrowRight size={18} />}
+            >
+              Open Editor
+            </Button>
+          </Stack>
+        </Container>
+      </Box>
 
-        {/* Converters */}
-        <Title order={3} c="dark" mb="md">
-          Format Converters
-        </Title>
-        <SimpleGrid cols={{ base: 2, sm: 3, md: 4 }} spacing="sm" mb={40}>
+      <Container size="lg" py={60}>
+        {/* Converters Section */}
+        <Group gap="sm" mb="lg">
+          <ThemeIcon size="lg" radius="md" variant="light" color="blue">
+            <TbTransform size={20} />
+          </ThemeIcon>
+          <Title order={2} c={isDarkMode ? "white" : "dark"}>
+            Format Converters
+          </Title>
+        </Group>
+        <Text c="dimmed" mb="xl" maw={500}>
+          Convert between JSON, YAML, XML, and CSV formats with a single click.
+        </Text>
+        <SimpleGrid cols={{ base: 2, sm: 3, md: 4 }} spacing="md" mb={60}>
           {converters.map(({ from, to, href }) => (
             <Card
               key={href}
               component={Link}
               href={href}
-              padding="sm"
-              radius="md"
+              padding="md"
+              radius="lg"
               withBorder
-              style={{ cursor: "pointer" }}
+              style={{
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+                borderColor: isDarkMode ? "#2a2a3e" : "#e9ecef",
+                background: isDarkMode ? "#1a1a2e" : "#ffffff",
+              }}
+              styles={{
+                root: {
+                  ":hover": {
+                    transform: "translateY(-2px)",
+                    boxShadow: isDarkMode
+                      ? "0 4px 12px rgba(0,0,0,0.3)"
+                      : "0 4px 12px rgba(0,0,0,0.08)",
+                    borderColor: "#7c3aed",
+                  },
+                },
+              }}
             >
               <Group gap="xs" justify="center">
-                <Badge variant="light" color="blue" size="sm">
+                <Badge variant="filled" color={formatColors[from]} size="sm" radius="sm">
                   {from}
                 </Badge>
-                <TbArrowsExchange size={14} color="#868e96" />
-                <Badge variant="light" color="grape" size="sm">
+                <TbTransform size={14} color="#868e96" />
+                <Badge variant="filled" color={formatColors[to]} size="sm" radius="sm">
                   {to}
                 </Badge>
               </Group>
@@ -97,29 +189,51 @@ const HomePage = () => {
           ))}
         </SimpleGrid>
 
-        {/* Type Generators */}
-        <Title order={3} c="dark" mb="md">
-          Type Generators
-        </Title>
-        <SimpleGrid cols={{ base: 2, sm: 3, md: 4 }} spacing="sm" mb={40}>
+        {/* Type Generators Section */}
+        <Group gap="sm" mb="lg">
+          <ThemeIcon size="lg" radius="md" variant="light" color="orange">
+            <TbCode size={20} />
+          </ThemeIcon>
+          <Title order={2} c={isDarkMode ? "white" : "dark"}>
+            Type Generators
+          </Title>
+        </Group>
+        <Text c="dimmed" mb="xl" maw={500}>
+          Generate strongly-typed definitions for TypeScript, Go, Rust, and Kotlin.
+        </Text>
+        <SimpleGrid cols={{ base: 2, sm: 3, md: 4 }} spacing="md" mb={60}>
           {typeGenerators.map(({ from, to, href }) => (
             <Card
               key={href}
               component={Link}
               href={href}
-              padding="sm"
-              radius="md"
+              padding="md"
+              radius="lg"
               withBorder
-              style={{ cursor: "pointer" }}
+              style={{
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+                borderColor: isDarkMode ? "#2a2a3e" : "#e9ecef",
+                background: isDarkMode ? "#1a1a2e" : "#ffffff",
+              }}
+              styles={{
+                root: {
+                  "&:hover": {
+                    transform: "translateY(-2px)",
+                    boxShadow: isDarkMode
+                      ? "0 4px 12px rgba(0,0,0,0.3)"
+                      : "0 4px 12px rgba(0,0,0,0.08)",
+                    borderColor: "#7c3aed",
+                  },
+                },
+              }}
             >
               <Group gap="xs" justify="center">
-                <Badge variant="light" color="orange" size="sm">
+                <Badge variant="filled" color={formatColors[from]} size="sm" radius="sm">
                   {from}
                 </Badge>
-                <Text size="xs" c="dimmed">
-                  →
-                </Text>
-                <Badge variant="light" color="pink" size="sm">
+                <TbArrowRight size={14} color="#868e96" />
+                <Badge variant="filled" color={formatColors[to]} size="sm" radius="sm">
                   {to}
                 </Badge>
               </Group>
@@ -127,27 +241,61 @@ const HomePage = () => {
           ))}
         </SimpleGrid>
 
-        {/* Schema */}
-        <Title order={3} c="dark" mb="md">
-          JSON Schema
-        </Title>
-        <Card
-          component={Link}
-          href="/tools/json-schema"
-          padding="md"
-          radius="md"
-          withBorder
-          mb={40}
-          style={{ cursor: "pointer" }}
-        >
-          <Text fw={500} c="dark">
-            Generate JSON Schema from your data
-          </Text>
-          <Text size="sm" c="dimmed">
-            Create validation schemas automatically
-          </Text>
-        </Card>
+        {/* Schema & Tools Section */}
+        <Group gap="sm" mb="lg">
+          <ThemeIcon size="lg" radius="md" variant="light" color="teal">
+            <TbSchema size={20} />
+          </ThemeIcon>
+          <Title order={2} c={isDarkMode ? "white" : "dark"}>
+            Developer Tools
+          </Title>
+        </Group>
+        <Text c="dimmed" mb="xl" maw={500}>
+          Generate JSON schemas and embed the visualizer in your own projects.
+        </Text>
+        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+          <Card
+            component={Link}
+            href="/tools/json-schema"
+            padding="xl"
+            radius="lg"
+            withBorder
+            style={{
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+              borderColor: isDarkMode ? "#2a2a3e" : "#e9ecef",
+              background: isDarkMode ? "#1a1a2e" : "#ffffff",
+            }}
+            styles={{
+              root: {
+                "&:hover": {
+                  transform: "translateY(-2px)",
+                  boxShadow: isDarkMode
+                    ? "0 4px 12px rgba(0,0,0,0.3)"
+                    : "0 4px 12px rgba(0,0,0,0.08)",
+                  borderColor: "#7c3aed",
+                },
+              },
+            }}
+          >
+            <Group gap="md">
+              <ThemeIcon size={48} radius="md" variant="light" color="violet">
+                <TbSchema size={24} />
+              </ThemeIcon>
+              <div>
+                <Text fw={600} c={isDarkMode ? "white" : "dark"} size="lg">
+                  JSON Schema Generator
+                </Text>
+                <Text size="sm" c="dimmed">
+                  Create validation schemas from your JSON data automatically
+                </Text>
+              </div>
+            </Group>
+          </Card>
+        </SimpleGrid>
       </Container>
+
+      <Footer isDarkMode={isDarkMode} />
     </Layout>
   );
 };
