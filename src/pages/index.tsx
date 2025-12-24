@@ -5,7 +5,6 @@ import {
   Title,
   Text,
   SimpleGrid,
-  Card,
   Group,
   Badge,
   Stack,
@@ -13,12 +12,35 @@ import {
   Box,
   ThemeIcon,
 } from "@mantine/core";
+import styled from "styled-components";
 import { NextSeo } from "next-seo";
 import { TbArrowRight, TbCode, TbSchema, TbTransform } from "react-icons/tb";
 import { SEO } from "../constants/seo";
 import { Footer } from "../layout/Footer";
 import Layout from "../layout/PageLayout";
 import useConfig from "../store/useConfig";
+
+const CardLink = styled(Link)<{ $isDark?: boolean }>`
+  display: block;
+  text-decoration: none;
+  border-radius: 12px;
+  border: 1px solid ${({ $isDark }) => ($isDark ? "#2a2a3e" : "#e9ecef")};
+  background: ${({ $isDark }) => ($isDark ? "#1a1a2e" : "#ffffff")};
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: ${({ $isDark }) =>
+      $isDark ? "0 4px 12px rgba(0,0,0,0.3)" : "0 4px 12px rgba(0,0,0,0.08)"};
+    border-color: #7c3aed;
+  }
+`;
+
+const LargeCardLink = styled(CardLink)`
+  padding: 24px;
+`;
 
 const converters = [
   { from: "JSON", to: "YAML", href: "/converter/json-to-yaml" },
@@ -151,31 +173,7 @@ const HomePage = () => {
         </Text>
         <SimpleGrid cols={{ base: 2, sm: 3, md: 4 }} spacing="md" mb={60}>
           {converters.map(({ from, to, href }) => (
-            <Card
-              key={href}
-              component={Link}
-              href={href}
-              padding="md"
-              radius="lg"
-              withBorder
-              style={{
-                cursor: "pointer",
-                transition: "all 0.2s ease",
-                borderColor: isDarkMode ? "#2a2a3e" : "#e9ecef",
-                background: isDarkMode ? "#1a1a2e" : "#ffffff",
-              }}
-              styles={{
-                root: {
-                  ":hover": {
-                    transform: "translateY(-2px)",
-                    boxShadow: isDarkMode
-                      ? "0 4px 12px rgba(0,0,0,0.3)"
-                      : "0 4px 12px rgba(0,0,0,0.08)",
-                    borderColor: "#7c3aed",
-                  },
-                },
-              }}
-            >
+            <CardLink key={href} href={href} $isDark={isDarkMode}>
               <Group gap="xs" justify="center">
                 <Badge variant="filled" color={formatColors[from]} size="sm" radius="sm">
                   {from}
@@ -185,7 +183,7 @@ const HomePage = () => {
                   {to}
                 </Badge>
               </Group>
-            </Card>
+            </CardLink>
           ))}
         </SimpleGrid>
 
@@ -203,31 +201,7 @@ const HomePage = () => {
         </Text>
         <SimpleGrid cols={{ base: 2, sm: 3, md: 4 }} spacing="md" mb={60}>
           {typeGenerators.map(({ from, to, href }) => (
-            <Card
-              key={href}
-              component={Link}
-              href={href}
-              padding="md"
-              radius="lg"
-              withBorder
-              style={{
-                cursor: "pointer",
-                transition: "all 0.2s ease",
-                borderColor: isDarkMode ? "#2a2a3e" : "#e9ecef",
-                background: isDarkMode ? "#1a1a2e" : "#ffffff",
-              }}
-              styles={{
-                root: {
-                  "&:hover": {
-                    transform: "translateY(-2px)",
-                    boxShadow: isDarkMode
-                      ? "0 4px 12px rgba(0,0,0,0.3)"
-                      : "0 4px 12px rgba(0,0,0,0.08)",
-                    borderColor: "#7c3aed",
-                  },
-                },
-              }}
-            >
+            <CardLink key={href} href={href} $isDark={isDarkMode}>
               <Group gap="xs" justify="center">
                 <Badge variant="filled" color={formatColors[from]} size="sm" radius="sm">
                   {from}
@@ -237,7 +211,7 @@ const HomePage = () => {
                   {to}
                 </Badge>
               </Group>
-            </Card>
+            </CardLink>
           ))}
         </SimpleGrid>
 
@@ -254,30 +228,7 @@ const HomePage = () => {
           Generate JSON schemas and embed the visualizer in your own projects.
         </Text>
         <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
-          <Card
-            component={Link}
-            href="/tools/json-schema"
-            padding="xl"
-            radius="lg"
-            withBorder
-            style={{
-              cursor: "pointer",
-              transition: "all 0.2s ease",
-              borderColor: isDarkMode ? "#2a2a3e" : "#e9ecef",
-              background: isDarkMode ? "#1a1a2e" : "#ffffff",
-            }}
-            styles={{
-              root: {
-                "&:hover": {
-                  transform: "translateY(-2px)",
-                  boxShadow: isDarkMode
-                    ? "0 4px 12px rgba(0,0,0,0.3)"
-                    : "0 4px 12px rgba(0,0,0,0.08)",
-                  borderColor: "#7c3aed",
-                },
-              },
-            }}
-          >
+          <LargeCardLink href="/tools/json-schema" $isDark={isDarkMode}>
             <Group gap="md">
               <ThemeIcon size={48} radius="md" variant="light" color="violet">
                 <TbSchema size={24} />
@@ -291,7 +242,7 @@ const HomePage = () => {
                 </Text>
               </div>
             </Group>
-          </Card>
+          </LargeCardLink>
         </SimpleGrid>
       </Container>
 
