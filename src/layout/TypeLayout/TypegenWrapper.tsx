@@ -1,5 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Container, Flex, Paper, Title, Text, Badge, Group, ThemeIcon, Stack, CopyButton, ActionIcon, Tooltip } from "@mantine/core";
+import {
+  Box,
+  Container,
+  Flex,
+  Paper,
+  Title,
+  Text,
+  Badge,
+  Group,
+  ThemeIcon,
+  Stack,
+  CopyButton,
+  ActionIcon,
+  Tooltip,
+} from "@mantine/core";
 import { Editor } from "@monaco-editor/react";
 import { NextSeo } from "next-seo";
 import { LuCheck, LuCircleX, LuCopy, LuCode, LuArrowRight } from "react-icons/lu";
@@ -127,17 +141,26 @@ export const TypegenWrapper = ({ from, to }: ConverterPagesProps) => {
                     Input
                   </Text>
                 </Group>
-                {!!originalContent && (
-                  contentHasError ? (
-                    <Badge color="red" variant="light" size="sm" leftSection={<LuCircleX size={12} />}>
+                {!!originalContent &&
+                  (contentHasError ? (
+                    <Badge
+                      color="red"
+                      variant="light"
+                      size="sm"
+                      leftSection={<LuCircleX size={12} />}
+                    >
                       Invalid
                     </Badge>
                   ) : (
-                    <Badge color="green" variant="light" size="sm" leftSection={<LuCheck size={12} />}>
+                    <Badge
+                      color="green"
+                      variant="light"
+                      size="sm"
+                      leftSection={<LuCheck size={12} />}
+                    >
                       Valid
                     </Badge>
-                  )
-                )}
+                  ))}
               </Flex>
             </Box>
             <Editor

@@ -1,5 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Container, Flex, Paper, Title, Text, Badge, Group, ThemeIcon, Stack, CopyButton, ActionIcon, Tooltip } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Paper,
+  Title,
+  Text,
+  Badge,
+  Group,
+  ThemeIcon,
+  Stack,
+  CopyButton,
+  ActionIcon,
+  Tooltip,
+} from "@mantine/core";
 import { Editor, type OnMount } from "@monaco-editor/react";
 import { JSONSchemaFaker } from "json-schema-faker";
 import { NextSeo } from "next-seo";
@@ -149,17 +164,26 @@ const JSONSchemaTool = () => {
                     Input Data
                   </Text>
                 </Group>
-                {!!json && (
-                  jsonError ? (
-                    <Badge color="red" variant="light" size="sm" leftSection={<LuCircleX size={12} />}>
+                {!!json &&
+                  (jsonError ? (
+                    <Badge
+                      color="red"
+                      variant="light"
+                      size="sm"
+                      leftSection={<LuCircleX size={12} />}
+                    >
                       Invalid
                     </Badge>
                   ) : (
-                    <Badge color="green" variant="light" size="sm" leftSection={<LuCheck size={12} />}>
+                    <Badge
+                      color="green"
+                      variant="light"
+                      size="sm"
+                      leftSection={<LuCheck size={12} />}
+                    >
                       Valid
                     </Badge>
-                  )
-                )}
+                  ))}
               </Flex>
             </Box>
             <Editor
@@ -199,17 +223,26 @@ const JSONSchemaTool = () => {
                   </Text>
                 </Group>
                 <Group gap="xs">
-                  {!!jsonSchema && (
-                    jsonSchemaError ? (
-                      <Badge color="red" variant="light" size="sm" leftSection={<LuCircleX size={12} />}>
+                  {!!jsonSchema &&
+                    (jsonSchemaError ? (
+                      <Badge
+                        color="red"
+                        variant="light"
+                        size="sm"
+                        leftSection={<LuCircleX size={12} />}
+                      >
                         Invalid
                       </Badge>
                     ) : (
-                      <Badge color="green" variant="light" size="sm" leftSection={<LuCheck size={12} />}>
+                      <Badge
+                        color="green"
+                        variant="light"
+                        size="sm"
+                        leftSection={<LuCheck size={12} />}
+                      >
                         Valid
                       </Badge>
-                    )
-                  )}
+                    ))}
                   <CopyButton value={jsonSchema}>
                     {({ copied, copy }) => (
                       <Tooltip label={copied ? "Copied!" : "Copy"}>

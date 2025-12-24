@@ -28,16 +28,28 @@ const LogoSvg = () => (
   <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#7c3aed"/>
-        <stop offset="100%" stopColor="#a855f7"/>
+        <stop offset="0%" stopColor="#7c3aed" />
+        <stop offset="100%" stopColor="#a855f7" />
       </linearGradient>
     </defs>
-    <rect width="32" height="32" rx="6" fill="url(#logoGradient)"/>
-    <path d="M11 8C9 8 8 9 8 11V14C8 16 7 17 5 17C7 17 8 18 8 20V23C8 25 9 26 11 26" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round"/>
-    <path d="M21 8C23 8 24 9 24 11V14C24 16 25 17 27 17C25 17 24 18 24 20V23C24 25 23 26 21 26" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round"/>
-    <circle cx="13" cy="13" r="1.5" fill="white"/>
-    <circle cx="16" cy="17" r="1.5" fill="white"/>
-    <circle cx="19" cy="21" r="1.5" fill="white"/>
+    <rect width="32" height="32" rx="6" fill="url(#logoGradient)" />
+    <path
+      d="M11 8C9 8 8 9 8 11V14C8 16 7 17 5 17C7 17 8 18 8 20V23C8 25 9 26 11 26"
+      stroke="white"
+      strokeWidth="2"
+      fill="none"
+      strokeLinecap="round"
+    />
+    <path
+      d="M21 8C23 8 24 9 24 11V14C24 16 25 17 27 17C25 17 24 18 24 20V23C24 25 23 26 21 26"
+      stroke="white"
+      strokeWidth="2"
+      fill="none"
+      strokeLinecap="round"
+    />
+    <circle cx="13" cy="13" r="1.5" fill="white" />
+    <circle cx="16" cy="17" r="1.5" fill="white" />
+    <circle cx="19" cy="21" r="1.5" fill="white" />
   </svg>
 );
 
@@ -54,7 +66,7 @@ const StyledTitle = styled.span<{ fontSize: string; $darkMode?: boolean }>`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  
+
   &:hover {
     opacity: 0.8;
   }
@@ -67,7 +79,13 @@ interface LogoProps extends React.ComponentPropsWithoutRef<"div"> {
   darkMode?: boolean;
 }
 
-export const JSONCrackLogo = ({ fontSize = "1.1rem", hideText, hideLogo, darkMode = false, ...props }: LogoProps) => {
+export const JSONCrackLogo = ({
+  fontSize = "1.1rem",
+  hideText,
+  hideLogo,
+  darkMode = false,
+  ...props
+}: LogoProps) => {
   const [isIframe, setIsIframe] = React.useState(false);
 
   useEffect(() => {
@@ -77,7 +95,11 @@ export const JSONCrackLogo = ({ fontSize = "1.1rem", hideText, hideLogo, darkMod
   return (
     <StyledLink href="/" prefetch={false} target={isIframe ? "_blank" : "_self"}>
       <StyledLogoWrapper>
-        {!hideLogo && <LogoIcon $darkMode={darkMode}><LogoSvg /></LogoIcon>}
+        {!hideLogo && (
+          <LogoIcon $darkMode={darkMode}>
+            <LogoSvg />
+          </LogoIcon>
+        )}
         {!hideText && (
           <StyledTitle fontSize={fontSize} $darkMode={darkMode} {...props}>
             JSON Crack

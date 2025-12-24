@@ -1,9 +1,19 @@
 ﻿import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Button, Menu, Group, Burger, Drawer, Stack, Divider, NavLink, ActionIcon, SegmentedControl, Box, Text } from "@mantine/core";
+import {
+  Button,
+  Menu,
+  Group,
+  Burger,
+  Drawer,
+  Stack,
+  Divider,
+  NavLink,
+  ActionIcon,
+} from "@mantine/core";
 import styled from "styled-components";
 import { LuChevronDown, LuSun, LuMoon, LuMonitor } from "react-icons/lu";
-import useConfig, { ThemeMode } from "../store/useConfig";
+import useConfig, { type ThemeMode } from "../store/useConfig";
 import { JSONCrackLogo } from "./JsonCrackLogo";
 
 const StyledNavbar = styled.nav<{ $darkMode?: boolean }>`
@@ -80,135 +90,135 @@ export const Navbar = ({ darkMode = false, showThemeSwitcher = true }: NavbarPro
           >
             Editor
           </Button>
-            <Menu withArrow shadow="sm">
+          <Menu withArrow shadow="sm">
             <Menu.Target>
-                <Button
+              <Button
                 variant="subtle"
                 color={buttonColor}
                 size="sm"
                 radius="md"
                 rightSection={<LuChevronDown size={14} />}
-                >
+              >
                 Converters
-                </Button>
+              </Button>
             </Menu.Target>
             <Menu.Dropdown maw={280} bg="white">
-                <Menu.Label>JSON</Menu.Label>
-                <Menu.Item component={Link} href="/converter/json-to-yaml">
+              <Menu.Label>JSON</Menu.Label>
+              <Menu.Item component={Link} href="/converter/json-to-yaml">
                 JSON to YAML
-                </Menu.Item>
-                <Menu.Item component={Link} href="/converter/json-to-xml">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/converter/json-to-xml">
                 JSON to XML
-                </Menu.Item>
-                <Menu.Item component={Link} href="/converter/json-to-csv">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/converter/json-to-csv">
                 JSON to CSV
-                </Menu.Item>
-                <Menu.Divider />
-                <Menu.Label>YAML</Menu.Label>
-                <Menu.Item component={Link} href="/converter/yaml-to-json">
+              </Menu.Item>
+              <Menu.Divider />
+              <Menu.Label>YAML</Menu.Label>
+              <Menu.Item component={Link} href="/converter/yaml-to-json">
                 YAML to JSON
-                </Menu.Item>
-                <Menu.Item component={Link} href="/converter/yaml-to-xml">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/converter/yaml-to-xml">
                 YAML to XML
-                </Menu.Item>
-                <Menu.Item component={Link} href="/converter/yaml-to-csv">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/converter/yaml-to-csv">
                 YAML to CSV
-                </Menu.Item>
-                <Menu.Divider />
-                <Menu.Label>XML</Menu.Label>
-                <Menu.Item component={Link} href="/converter/xml-to-json">
+              </Menu.Item>
+              <Menu.Divider />
+              <Menu.Label>XML</Menu.Label>
+              <Menu.Item component={Link} href="/converter/xml-to-json">
                 XML to JSON
-                </Menu.Item>
-                <Menu.Item component={Link} href="/converter/xml-to-yaml">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/converter/xml-to-yaml">
                 XML to YAML
-                </Menu.Item>
-                <Menu.Item component={Link} href="/converter/xml-to-csv">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/converter/xml-to-csv">
                 XML to CSV
-                </Menu.Item>
-                <Menu.Divider />
-                <Menu.Label>CSV</Menu.Label>
-                <Menu.Item component={Link} href="/converter/csv-to-json">
+              </Menu.Item>
+              <Menu.Divider />
+              <Menu.Label>CSV</Menu.Label>
+              <Menu.Item component={Link} href="/converter/csv-to-json">
                 CSV to JSON
-                </Menu.Item>
-                <Menu.Item component={Link} href="/converter/csv-to-yaml">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/converter/csv-to-yaml">
                 CSV to YAML
-                </Menu.Item>
-                <Menu.Item component={Link} href="/converter/csv-to-xml">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/converter/csv-to-xml">
                 CSV to XML
-                </Menu.Item>
+              </Menu.Item>
             </Menu.Dropdown>
-            </Menu>
-            <Menu withArrow shadow="sm">
+          </Menu>
+          <Menu withArrow shadow="sm">
             <Menu.Target>
-                <Button
+              <Button
                 variant="subtle"
                 color={buttonColor}
                 size="sm"
                 radius="md"
                 rightSection={<LuChevronDown size={14} />}
-                >
+              >
                 Types
-                </Button>
+              </Button>
             </Menu.Target>
             <Menu.Dropdown maw={280} bg="white">
-                <Menu.Label>TypeScript</Menu.Label>
-                <Menu.Item component={Link} href="/type/json-to-typescript">
+              <Menu.Label>TypeScript</Menu.Label>
+              <Menu.Item component={Link} href="/type/json-to-typescript">
                 JSON to TypeScript
-                </Menu.Item>
-                <Menu.Item component={Link} href="/type/yaml-to-typescript">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/type/yaml-to-typescript">
                 YAML to TypeScript
-                </Menu.Item>
-                <Menu.Item component={Link} href="/type/xml-to-typescript">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/type/xml-to-typescript">
                 XML to TypeScript
-                </Menu.Item>
-                <Menu.Item component={Link} href="/type/csv-to-typescript">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/type/csv-to-typescript">
                 CSV to TypeScript
-                </Menu.Item>
-                <Menu.Divider />
-                <Menu.Label>Go</Menu.Label>
-                <Menu.Item component={Link} href="/type/json-to-go">
+              </Menu.Item>
+              <Menu.Divider />
+              <Menu.Label>Go</Menu.Label>
+              <Menu.Item component={Link} href="/type/json-to-go">
                 JSON to Go
-                </Menu.Item>
-                <Menu.Item component={Link} href="/type/yaml-to-go">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/type/yaml-to-go">
                 YAML to Go
-                </Menu.Item>
-                <Menu.Item component={Link} href="/type/xml-to-go">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/type/xml-to-go">
                 XML to Go
-                </Menu.Item>
-                <Menu.Item component={Link} href="/type/csv-to-go">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/type/csv-to-go">
                 CSV to Go
-                </Menu.Item>
-                <Menu.Divider />
-                <Menu.Label>Rust</Menu.Label>
-                <Menu.Item component={Link} href="/type/json-to-rust">
+              </Menu.Item>
+              <Menu.Divider />
+              <Menu.Label>Rust</Menu.Label>
+              <Menu.Item component={Link} href="/type/json-to-rust">
                 JSON to Rust
-                </Menu.Item>
-                <Menu.Item component={Link} href="/type/yaml-to-rust">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/type/yaml-to-rust">
                 YAML to Rust
-                </Menu.Item>
-                <Menu.Item component={Link} href="/type/xml-to-rust">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/type/xml-to-rust">
                 XML to Rust
-                </Menu.Item>
-                <Menu.Item component={Link} href="/type/csv-to-rust">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/type/csv-to-rust">
                 CSV to Rust
-                </Menu.Item>
-                <Menu.Divider />
-                <Menu.Label>Kotlin</Menu.Label>
-                <Menu.Item component={Link} href="/type/json-to-kotlin">
+              </Menu.Item>
+              <Menu.Divider />
+              <Menu.Label>Kotlin</Menu.Label>
+              <Menu.Item component={Link} href="/type/json-to-kotlin">
                 JSON to Kotlin
-                </Menu.Item>
-                <Menu.Item component={Link} href="/type/yaml-to-kotlin">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/type/yaml-to-kotlin">
                 YAML to Kotlin
-                </Menu.Item>
-                <Menu.Item component={Link} href="/type/xml-to-kotlin">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/type/xml-to-kotlin">
                 XML to Kotlin
-                </Menu.Item>
-                <Menu.Item component={Link} href="/type/csv-to-kotlin">
+              </Menu.Item>
+              <Menu.Item component={Link} href="/type/csv-to-kotlin">
                 CSV to Kotlin
-                </Menu.Item>
+              </Menu.Item>
             </Menu.Dropdown>
-            </Menu>
-            <Button
+          </Menu>
+          <Button
             component={Link}
             prefetch={false}
             href="/tools/json-schema"
@@ -216,49 +226,49 @@ export const Navbar = ({ darkMode = false, showThemeSwitcher = true }: NavbarPro
             color={buttonColor}
             size="sm"
             radius="md"
-            >
+          >
             Schema
-            </Button>
-            {showThemeSwitcher && (
-              <Menu withArrow shadow="sm">
-                <Menu.Target>
-                  <ActionIcon
-                    variant="subtle"
-                    color={buttonColor}
-                    size="lg"
-                    radius="md"
-                    aria-label="Theme switcher"
-                  >
-                    <ThemeIcon size={18} />
-                  </ActionIcon>
-                </Menu.Target>
-                <Menu.Dropdown>
-                  <Menu.Label>Theme</Menu.Label>
-                  <Menu.Item
-                    leftSection={<LuSun size={14} />}
-                    onClick={() => setThemeMode("light")}
-                    bg={themeMode === "light" ? "violet.1" : undefined}
-                  >
-                    Light
-                  </Menu.Item>
-                  <Menu.Item
-                    leftSection={<LuMoon size={14} />}
-                    onClick={() => setThemeMode("dark")}
-                    bg={themeMode === "dark" ? "violet.1" : undefined}
-                  >
-                    Dark
-                  </Menu.Item>
-                  <Menu.Item
-                    leftSection={<LuMonitor size={14} />}
-                    onClick={() => setThemeMode("auto")}
-                    bg={themeMode === "auto" ? "violet.1" : undefined}
-                  >
-                    System
-                  </Menu.Item>
-                </Menu.Dropdown>
-              </Menu>
-            )}
-      </Group>
+          </Button>
+          {showThemeSwitcher && (
+            <Menu withArrow shadow="sm">
+              <Menu.Target>
+                <ActionIcon
+                  variant="subtle"
+                  color={buttonColor}
+                  size="lg"
+                  radius="md"
+                  aria-label="Theme switcher"
+                >
+                  <ThemeIcon size={18} />
+                </ActionIcon>
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Menu.Label>Theme</Menu.Label>
+                <Menu.Item
+                  leftSection={<LuSun size={14} />}
+                  onClick={() => setThemeMode("light")}
+                  bg={themeMode === "light" ? "violet.1" : undefined}
+                >
+                  Light
+                </Menu.Item>
+                <Menu.Item
+                  leftSection={<LuMoon size={14} />}
+                  onClick={() => setThemeMode("dark")}
+                  bg={themeMode === "dark" ? "violet.1" : undefined}
+                >
+                  Dark
+                </Menu.Item>
+                <Menu.Item
+                  leftSection={<LuMonitor size={14} />}
+                  onClick={() => setThemeMode("auto")}
+                  bg={themeMode === "auto" ? "violet.1" : undefined}
+                >
+                  System
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          )}
+        </Group>
       </DesktopMenu>
 
       {/* Mobile Menu Button */}
@@ -312,51 +322,191 @@ export const Navbar = ({ darkMode = false, showThemeSwitcher = true }: NavbarPro
 
           <NavLink label="Converters" childrenOffset={16}>
             <NavLink label="JSON" childrenOffset={12}>
-              <NavLink component={Link} href="/converter/json-to-yaml" label="JSON to YAML" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/converter/json-to-xml" label="JSON to XML" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/converter/json-to-csv" label="JSON to CSV" onClick={() => setMobileMenuOpen(false)} />
+              <NavLink
+                component={Link}
+                href="/converter/json-to-yaml"
+                label="JSON to YAML"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/converter/json-to-xml"
+                label="JSON to XML"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/converter/json-to-csv"
+                label="JSON to CSV"
+                onClick={() => setMobileMenuOpen(false)}
+              />
             </NavLink>
             <NavLink label="YAML" childrenOffset={12}>
-              <NavLink component={Link} href="/converter/yaml-to-json" label="YAML to JSON" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/converter/yaml-to-xml" label="YAML to XML" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/converter/yaml-to-csv" label="YAML to CSV" onClick={() => setMobileMenuOpen(false)} />
+              <NavLink
+                component={Link}
+                href="/converter/yaml-to-json"
+                label="YAML to JSON"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/converter/yaml-to-xml"
+                label="YAML to XML"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/converter/yaml-to-csv"
+                label="YAML to CSV"
+                onClick={() => setMobileMenuOpen(false)}
+              />
             </NavLink>
             <NavLink label="XML" childrenOffset={12}>
-              <NavLink component={Link} href="/converter/xml-to-json" label="XML to JSON" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/converter/xml-to-yaml" label="XML to YAML" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/converter/xml-to-csv" label="XML to CSV" onClick={() => setMobileMenuOpen(false)} />
+              <NavLink
+                component={Link}
+                href="/converter/xml-to-json"
+                label="XML to JSON"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/converter/xml-to-yaml"
+                label="XML to YAML"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/converter/xml-to-csv"
+                label="XML to CSV"
+                onClick={() => setMobileMenuOpen(false)}
+              />
             </NavLink>
             <NavLink label="CSV" childrenOffset={12}>
-              <NavLink component={Link} href="/converter/csv-to-json" label="CSV to JSON" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/converter/csv-to-yaml" label="CSV to YAML" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/converter/csv-to-xml" label="CSV to XML" onClick={() => setMobileMenuOpen(false)} />
+              <NavLink
+                component={Link}
+                href="/converter/csv-to-json"
+                label="CSV to JSON"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/converter/csv-to-yaml"
+                label="CSV to YAML"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/converter/csv-to-xml"
+                label="CSV to XML"
+                onClick={() => setMobileMenuOpen(false)}
+              />
             </NavLink>
           </NavLink>
 
           <NavLink label="Type Generators" childrenOffset={16}>
             <NavLink label="TypeScript" childrenOffset={12}>
-              <NavLink component={Link} href="/type/json-to-typescript" label="JSON to TypeScript" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/type/yaml-to-typescript" label="YAML to TypeScript" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/type/xml-to-typescript" label="XML to TypeScript" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/type/csv-to-typescript" label="CSV to TypeScript" onClick={() => setMobileMenuOpen(false)} />
+              <NavLink
+                component={Link}
+                href="/type/json-to-typescript"
+                label="JSON to TypeScript"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/type/yaml-to-typescript"
+                label="YAML to TypeScript"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/type/xml-to-typescript"
+                label="XML to TypeScript"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/type/csv-to-typescript"
+                label="CSV to TypeScript"
+                onClick={() => setMobileMenuOpen(false)}
+              />
             </NavLink>
             <NavLink label="Go" childrenOffset={12}>
-              <NavLink component={Link} href="/type/json-to-go" label="JSON to Go" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/type/yaml-to-go" label="YAML to Go" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/type/xml-to-go" label="XML to Go" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/type/csv-to-go" label="CSV to Go" onClick={() => setMobileMenuOpen(false)} />
+              <NavLink
+                component={Link}
+                href="/type/json-to-go"
+                label="JSON to Go"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/type/yaml-to-go"
+                label="YAML to Go"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/type/xml-to-go"
+                label="XML to Go"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/type/csv-to-go"
+                label="CSV to Go"
+                onClick={() => setMobileMenuOpen(false)}
+              />
             </NavLink>
             <NavLink label="Rust" childrenOffset={12}>
-              <NavLink component={Link} href="/type/json-to-rust" label="JSON to Rust" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/type/yaml-to-rust" label="YAML to Rust" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/type/xml-to-rust" label="XML to Rust" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/type/csv-to-rust" label="CSV to Rust" onClick={() => setMobileMenuOpen(false)} />
+              <NavLink
+                component={Link}
+                href="/type/json-to-rust"
+                label="JSON to Rust"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/type/yaml-to-rust"
+                label="YAML to Rust"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/type/xml-to-rust"
+                label="XML to Rust"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/type/csv-to-rust"
+                label="CSV to Rust"
+                onClick={() => setMobileMenuOpen(false)}
+              />
             </NavLink>
             <NavLink label="Kotlin" childrenOffset={12}>
-              <NavLink component={Link} href="/type/json-to-kotlin" label="JSON to Kotlin" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/type/yaml-to-kotlin" label="YAML to Kotlin" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/type/xml-to-kotlin" label="XML to Kotlin" onClick={() => setMobileMenuOpen(false)} />
-              <NavLink component={Link} href="/type/csv-to-kotlin" label="CSV to Kotlin" onClick={() => setMobileMenuOpen(false)} />
+              <NavLink
+                component={Link}
+                href="/type/json-to-kotlin"
+                label="JSON to Kotlin"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/type/yaml-to-kotlin"
+                label="YAML to Kotlin"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/type/xml-to-kotlin"
+                label="XML to Kotlin"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <NavLink
+                component={Link}
+                href="/type/csv-to-kotlin"
+                label="CSV to Kotlin"
+                onClick={() => setMobileMenuOpen(false)}
+              />
             </NavLink>
           </NavLink>
 
