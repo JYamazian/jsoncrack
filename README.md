@@ -1,38 +1,48 @@
 <!-- PROJECT LOGO -->
 <p align="center">
   <a href="https://github.com/AykutSarac/jsoncrack.com">
-   <img src="./public/assets/192.png" height="50" alt="Logo">
+   <img src="./public/favicon.svg" height="50" alt="Logo">
   </a>
 
   <h1 align="center">JSON Crack</h1>
+  <h4 align="center">✨ Enhanced Fork with Modern UI</h4>
+  <p align="center"><em>Fork maintained by <a href="https://github.com/JYamazian">@JYamazian</a></em></p>
 
   <p align="center">
-    The open-source JSON Editor.
+    A refreshed, open-source JSON visualization and conversion toolkit.
     <br />
-    <a href="https://jsoncrack.com"><strong>Learn more »</strong></a>
+    <a href="https://github.com/AykutSarac/jsoncrack.com"><strong>Original Project »</strong></a>
     <br />
     <br />
-    <a href="https://todiagram.com">ToDiagram</a>
+    <a href="https://github.com/AykutSarac/jsoncrack.com">Upstream</a>
     ·
     <a href="https://discord.gg/yVyTtCRueq">Discord</a>
     ·
-    <a href="https://jsoncrack.com">Website</a>
-    ·
     <a href="https://github.com/AykutSarac/jsoncrack.com/issues">Issues</a>
-    ·
-    <a href="https://marketplace.visualstudio.com/items?itemName=AykutSarac.jsoncrack-vscode">VS Code</a>
   </p>
 </p>
 
+> **Note**: This is a fork of the original [JSON Crack](https://github.com/AykutSarac/jsoncrack.com) by [@AykutSarac](https://github.com/AykutSarac). This version includes UI/UX improvements and additional features while maintaining the core functionality of the original project.
+
+---
+
 <!-- ABOUT THE PROJECT -->
 
-## About the Project
+## About This Fork
 
-<img width="100%" alt="booking-screen" src="./public/assets/editor.webp">
+This fork focuses on a streamlined, modern user experience with:
 
-## Visualize JSON into interactive graphs
+- 🎨 **Redesigned UI** - Clean, modern interface with improved visual hierarchy
+- 🌓 **Theme Switching** - Light, Dark, and Auto (system-based) theme modes
+- 📱 **Responsive Navigation** - Mobile-friendly navbar with hamburger menu
+- 🔄 **Format Converters** - Convert between JSON, YAML, XML, and CSV
+- 🔤 **Type Generators** - Generate TypeScript, Go, Rust, and Kotlin types from data
+- 📋 **JSON Schema Generator** - Create and validate JSON schemas
+- ✨ **Enhanced Logo & Branding** - New SVG logo with modern design
 
-JSON Crack is a tool for visualizing JSON data in a structured, interactive graphs, making it easier to explore, format, and validate JSON. It offers features like converting JSON to other formats (CSV, YAML), generating JSON Schema, executing queries, and exporting visualizations as images. Designed for both readability and usability.
+## Original Features
+
+JSON Crack is a tool for visualizing JSON data in structured, interactive graphs, making it easier to explore, format, and validate JSON. It offers features like converting JSON to other formats (CSV, YAML), generating JSON Schema, executing queries, and exporting visualizations as images.
 
 * **Visualizer**: Instantly convert JSON, YAML, CSV, XML, and TOML into interactive graphs or trees in dark or light mode.
 * **Convert**: Seamlessly transform data formats, like JSON to CSV or XML to JSON, for easy sharing.
@@ -43,7 +53,9 @@ JSON Crack is a tool for visualizing JSON data in a structured, interactive grap
 * **Export Image**: Download your visualization as PNG, JPEG, or SVG.
 * **Privacy**: All data processing is local; nothing is stored on our servers.
 
-## Recognition
+## Credits & Recognition
+
+This project is based on the amazing work by [@AykutSarac](https://github.com/AykutSarac) and the JSON Crack community.
 
 <a href="https://news.ycombinator.com/item?id=32626873">
   <img
@@ -64,9 +76,9 @@ JSON Crack is a tool for visualizing JSON data in a structured, interactive grap
 
 ## Stay Up-to-Date
 
-JSON Crack officially launched as v1.0 on the 17th of February 2022 and we've come a long way so far. Watch **releases** of this repository to be notified of future updates:
+This fork is maintained separately from the original project. For the original JSON Crack updates, watch the [upstream repository](https://github.com/AykutSarac/jsoncrack.com).
 
-<a href="https://github.com/AykutSarac/jsoncrack.com"><img src="https://img.shields.io/github/stars/AykutSarac/jsoncrack.com" alt="Star at GitHub" /></a>
+<a href="https://github.com/AykutSarac/jsoncrack.com"><img src="https://img.shields.io/github/stars/AykutSarac/jsoncrack.com" alt="Star Original at GitHub" /></a>
 
 <!-- GETTING STARTED -->
 
@@ -86,7 +98,7 @@ Here is what you need to be able to run JSON Crack.
 
 ### Setup
 
-1. Clone the repo into a public GitHub repository (or fork https://github.com/AykutSarac/jsoncrack.com/fork). If you plan to distribute the code, read the [`LICENSE`](/LICENSE.md) for additional details.
+1. Clone this fork (or fork the original at https://github.com/AykutSarac/jsoncrack.com/fork). If you plan to distribute the code, read the [`LICENSE`](/LICENSE.md) for additional details.
 
    ```sh
    git clone https://github.com/AykutSarac/jsoncrack.com.git
