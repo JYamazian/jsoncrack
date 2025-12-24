@@ -1,34 +1,12 @@
 import React from "react";
-import Link from "next/link";
-import { Anchor, Button, Flex, List, SimpleGrid, Stack } from "@mantine/core";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { formats } from "../../enums/file.enum";
-
-const languages = formats.map(format => format.label);
-
-function groupCombinations(array: string[]): Record<string, string[]> {
-  // Create an object to hold the grouped combinations
-  const grouped = {};
-
-  // Iterate over each item in the array
-  array.forEach(from => {
-    // Filter out the same item for the "to" array
-    const targets = array.filter(to => to !== from);
-
-    // Add the "from" item as the key and the "to" items as the value array
-    grouped[from] = targets;
-  });
-
-  return grouped;
-}
-
-const groupedLanguages = groupCombinations(languages);
+// import Link from "next/link";
+import { Flex, Stack } from "@mantine/core";
 
 export const PageLinks = () => {
   return (
     <Flex justify="space-between" align="center">
       <Stack gap="sm" py="md" justify="center">
-        <Button
+        {/* <Button
           component={Link}
           prefetch={false}
           href="/editor"
@@ -44,9 +22,9 @@ export const PageLinks = () => {
           }}
         >
           Open JSON Crack
-        </Button>
+        </Button> */}
       </Stack>
-      <SimpleGrid cols={4} w="fit-content">
+      {/* <SimpleGrid cols={4} w="fit-content">
         {Object.entries(groupedLanguages).map(([from, tos]) => (
           <List key={from} listStyleType="none">
             {tos.map(to => (
@@ -63,7 +41,7 @@ export const PageLinks = () => {
             ))}
           </List>
         ))}
-      </SimpleGrid>
+      </SimpleGrid> */}
     </Flex>
   );
 };

@@ -9,16 +9,15 @@ import "allotment/dist/style.css";
 import { NextSeo } from "next-seo";
 import { SEO } from "../constants/seo";
 import { darkTheme, lightTheme } from "../constants/theme";
-import { Banner } from "../features/Banner";
 import { BottomBar } from "../features/editor/BottomBar";
 import { FullscreenDropzone } from "../features/editor/FullscreenDropzone";
 import { Toolbar } from "../features/editor/Toolbar";
 import useGraph from "../features/editor/views/GraphView/stores/useGraph";
+import { Navbar } from "../layout/Navbar";
 import useConfig from "../store/useConfig";
 import useFile from "../store/useFile";
 
 const ModalController = dynamic(() => import("../features/modals/ModalController"));
-const ExternalMode = dynamic(() => import("../features/editor/ExternalMode"));
 
 export const StyledPageWrapper = styled.div`
   display: flex;
@@ -86,11 +85,10 @@ const EditorPage = () => {
         canonical="https://jsoncrack.com/editor"
       />
       <ThemeProvider theme={darkmodeEnabled ? darkTheme : lightTheme}>
-        <ExternalMode />
         <ModalController />
         <StyledEditorWrapper>
           <StyledPageWrapper>
-            {process.env.NEXT_PUBLIC_DISABLE_EXTERNAL_MODE === "true" ? null : <Banner />}
+            <Navbar darkMode={darkmodeEnabled} />
             <Toolbar />
             <StyledEditorWrapper>
               <StyledEditor proportionalLayout={false}>
