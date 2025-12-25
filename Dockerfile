@@ -18,7 +18,7 @@ RUN corepack enable pnpm && pnpm run build
 FROM nginxinc/nginx-unprivileged:stable AS production
 
 LABEL org.opencontainers.image.source=https://github.com/JYamazian/jsoncrack
-LABEL org.opencontainers.image.version=v1.0.0-fork
+LABEL org.opencontainers.image.version=v1.0.1-fork
 LABEL org.opencontainers.image.title="JSON Crack"
 LABEL org.opencontainers.image.description="Enhanced fork of JSON Crack with modern UI"
 

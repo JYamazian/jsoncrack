@@ -171,7 +171,7 @@ const HomePage = () => {
         <Text c="dimmed" mb="xl" maw={500}>
           Convert between JSON, YAML, XML, and CSV formats with a single click.
         </Text>
-        <SimpleGrid cols={{ base: 2, sm: 3, md: 4 }} spacing="md" mb={60}>
+        <SimpleGrid cols={{ base: 1, xs: 2, sm: 3, md: 4 }} spacing="md" mb={60}>
           {converters.map(({ from, to, href }) => (
             <CardLink key={href} href={href} $isDark={isDarkMode}>
               <Group gap="xs" justify="center">
@@ -199,7 +199,7 @@ const HomePage = () => {
         <Text c="dimmed" mb="xl" maw={500}>
           Generate strongly-typed definitions for TypeScript, Go, Rust, and Kotlin.
         </Text>
-        <SimpleGrid cols={{ base: 2, sm: 3, md: 4 }} spacing="md" mb={60}>
+        <SimpleGrid cols={{ base: 1, xs: 2, sm: 3, md: 4 }} spacing="md" mb={60}>
           {typeGenerators.map(({ from, to, href }) => (
             <CardLink key={href} href={href} $isDark={isDarkMode}>
               <Group gap="xs" justify="center">
